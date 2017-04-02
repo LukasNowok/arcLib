@@ -21,17 +21,13 @@ Returns
 		index=0;
 		offset=0;
 
-		oscDef=OSCdef(\turns++enc,
+		EncDeltadef(\turns++enc,
 			{
-				arg message;
-				var encMes=message.at(1),delta=message.at(2);
-				if(enc==encMes)
-				{
-					value=(value+(sensitivity*delta)).clip(40,88);
-					this.p(value,width);
-					value.postln;
-				};
-			}, arc.prefix++"/enc/delta";
+				arg n,delta;
+				value=(value+(sensitivity*delta)).clip(40,88);
+				this.p(value,width);
+				value.postln;
+			}, enc,device:arc;
 		);
 	}
 
@@ -64,6 +60,6 @@ Returns
 				ring.put(point.at(0)-1, point.at(1));
 			};
 		);
-		arc.ringmap(enc,ring);
+		arc.ringMap(enc,ring);
 	}
 }
